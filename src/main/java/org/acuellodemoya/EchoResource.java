@@ -1,31 +1,19 @@
 package org.acuellodemoya;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
 
 @Path("/hello")
 public class EchoResource {
 
     @GET
-    public String sayHi(){
-    return "Hello, World!";
+    public String sayHi(@QueryParam("name") String name){
+        if(name == null) return "Bye";
+        return "Hello, " + name + "!";
     }
 
-    @Path("morning")
+    @Path("/{name}")
     @GET
-    public String helloMorning(){
-        return "Good morning!";
-    }
-
-    @Path("evening")
-    @GET
-    public String helloEvening(){
-        return "Good Evening!";
-    }
-
-    @Path("night")
-    @GET
-    public String helloNight(){
-        return "Good Night!";
+    public String sayHiUrlParam(@PathParam("name") String name){
+        return "Hi " + name + "!";
     }
 }
